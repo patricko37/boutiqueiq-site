@@ -49,7 +49,7 @@
     // Give the service eight seconds. A hung request must never leave the button stuck on "Sending".
     var controller = window.AbortController ? new AbortController() : null;
     var timer = setTimeout(function () { if (controller) controller.abort(); }, 8000);
-    fetch(form.action.replace("formsubmit.co/", "formsubmit.co/ajax/"), {
+    fetch(form.action, {
       method: "POST",
       headers: { Accept: "application/json" },
       body: new FormData(form),
@@ -59,7 +59,7 @@
       if (!r.ok) throw new Error(String(r.status));
       return r.json();
     }).then(function (data) {
-      if (!data || String(data.success) !== "true") throw new Error("refused");
+      if (!data || data.ok !== true) throw new Error("refused");
       confirmed(email);
     }).catch(function () {
       clearTimeout(timer);
