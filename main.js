@@ -59,7 +59,7 @@
     }).catch(function () {
       button.disabled = false;
       button.textContent = "Request an invite";
-      note.textContent = "That didn't go through. Try again, or email patrickodonohuev@icloud.com and we'll add you by hand.";
+      note.textContent = "That didn't go through. Try again, or email odonohuev.p@appboutiqueiq.com and we'll add you by hand.";
     });
   });
 })();
