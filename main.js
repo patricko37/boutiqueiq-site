@@ -34,7 +34,7 @@
 
   function confirmed(email) {
     form.hidden = true;
-    note.textContent = "You're on the list" + (email ? " as " + email : "") + ". We'll send a TestFlight invite as beta seats open, and tell you the day it reaches the App Store.";
+    note.textContent = "You're on the list" + (email ? " as " + email : "") + ". We'll email you within a few days to set up a short call, and send your TestFlight invite as beta seats open.";
   }
 
   if (/[?&]invited=1/.test(window.location.search)) confirmed("");
