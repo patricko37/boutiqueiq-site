@@ -291,15 +291,17 @@ main > section.get { max-width: none; background: var(--text); color: var(--ink-
 .get .button { background: var(--ink-on-light); color: var(--text); }
 .get .button:hover { background: var(--surface); }
 .get :focus-visible { outline-color: var(--brass-deep); }
-.signup { display: flex; gap: 10px; margin-top: 8px; width: 100%; }
-.signup input {
-  flex: 1; min-width: 0; min-height: 52px; padding: 14px 16px;
+.signup { display: grid; grid-template-columns: 1fr; gap: 10px; margin-top: 8px; width: 100%; }
+.signup .button { justify-self: start; margin-top: 4px; }
+.signup input, .signup textarea {
+  min-width: 0; min-height: 52px; padding: 14px 16px;
   background: #FFFDF6; color: var(--ink-on-light);
   border: 1px solid rgba(15, 29, 58, 0.32); border-radius: var(--r-md);
-  font: inherit;
+  font: inherit; line-height: 1.45;
 }
-.signup input::placeholder { color: #5E6A86; }
-.signup input:focus { border-color: var(--brass-deep); outline: none; }
+.signup textarea { resize: vertical; min-height: 84px; }
+.signup input::placeholder, .signup textarea::placeholder { color: #5E6A86; }
+.signup input:focus, .signup textarea:focus { border-color: var(--brass-deep); outline: none; }
 
 /* Footer */
 .foot {
@@ -372,7 +374,8 @@ main > section.get { max-width: none; background: var(--text); color: var(--ink-
   .ledger td:first-child { grid-column: 1 / -1; }
   .ledger .col-when { width: auto; font-size: 14px; color: var(--text-3); padding-left: 32px; }
   .ledger .col-share, .ledger td.col-share { width: auto; font-size: 18px; padding-left: 0; align-self: baseline; }
-  .signup { flex-direction: column; }
+  .signup .button { justify-self: stretch; }
+  .signup textarea { min-height: 100px; }
   .pace-label-close { padding-right: 0; transform: translateX(-100%); }
   .pace-n { font-size: 40px; }
   .pace-gap { margin-top: 28px; text-align: left; font-size: 16px; }
