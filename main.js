@@ -46,20 +46,26 @@
     var email = form.querySelector("#email").value;
     button.disabled = true;
     button.textContent = "Sending";
+    // Give the service eight seconds. A hung request must never leave the button stuck on "Sending".
+    var controller = window.AbortController ? new AbortController() : null;
+    var timer = setTimeout(function () { if (controller) controller.abort(); }, 8000);
     fetch(form.action.replace("formsubmit.co/", "formsubmit.co/ajax/"), {
       method: "POST",
       headers: { Accept: "application/json" },
-      body: new FormData(form)
+      body: new FormData(form),
+      signal: controller ? controller.signal : undefined
     }).then(function (r) {
+      clearTimeout(timer);
       if (!r.ok) throw new Error(String(r.status));
       return r.json();
     }).then(function (data) {
       if (!data || String(data.success) !== "true") throw new Error("refused");
       confirmed(email);
     }).catch(function () {
+      clearTimeout(timer);
       button.disabled = false;
       button.textContent = "Request an invite";
-      note.textContent = "That didn't go through. Try again, or email odonohuev.p@appboutiqueiq.com and we'll add you by hand.";
+      note.innerHTML = "That didn't go through. Try again, or email <a href=\"mailto:odonohuev.p@appboutiqueiq.com?subject=BoutiqueIQ%20invite%20request\">odonohuev.p@appboutiqueiq.com</a> and we'll add you by hand.";
     });
   });
 })();
